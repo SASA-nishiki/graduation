@@ -38,12 +38,19 @@ def lower_conversion():
     c.execute("select sentence from Example_Sentence where situation = ? and destination = ?",(query["situation"],query["destination"]))
 
     result_tuple=c.fetchone()
-    # print(result_tuple[0])
-
     c.close()
+    
+    return_data = None
 
-    return_data = {"result":result_tuple[0]}
+    # DBから帰ってきた値から戻り値を決定
+    if result_tuple != None: 
+        # print(result_tuple[0])
+        return_data = {"result":result_tuple[0]}
+    else:
+        return_data = {"result":"いじわるしないで"}
+        
     return jsonify(ResultSet=json.dumps(return_data))
+
 
 @app.errorhandler(403)
 def mistake403(code):
