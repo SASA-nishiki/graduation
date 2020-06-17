@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <p>
+        <select name="situation" id="situation">    
+            {% for item in situation_list %}
+                <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="destination" id="destination">
+            {% for item in destination_list %}
+                <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+        </select>
+
+        <button id="button">例文を表示</button>
+
+    </p>
+
+    <input type="text" name="Target" id="Target" value="" >
+
+    <p>
+        <button onclick="copyToClipboard()">クリップボードにコピー</button>
+        
+        <button id="clr">例文をクリア</button>      
+    </p>
+
+{% endblock %}
