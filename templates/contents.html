@@ -2,7 +2,7 @@
 {% block content %}
 
     <p>
-        <select id="situation">    
+                <select id="situation">    
             {% for item in situation_list %}
                 <option value="{{item}}">{{item}}</option>
             {% endfor %}
@@ -15,11 +15,10 @@
         </select>
 
         <button id="button">例文を表示</button>
-
     </p>
 
-    <input type="text" id="Target" value="" >
-
+    <textarea id="Target" cols="50" rows="10"></textarea>
+    
     <p>
         <button onclick="copyToClipboard()">クリップボードにコピー</button>
         
