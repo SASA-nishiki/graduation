@@ -2,13 +2,13 @@
 {% block content %}
 
     <p>
-        <select name="situation" id="situation">    
+        <select id="situation">    
             {% for item in situation_list %}
                 <option value="{{item}}">{{item}}</option>
             {% endfor %}
         </select>
 
-        <select name="destination" id="destination">
+        <select id="destination">
             {% for item in destination_list %}
                 <option value="{{item}}">{{item}}</option>
             {% endfor %}
@@ -18,7 +18,7 @@
 
     </p>
 
-    <input type="text" name="Target" id="Target" value="" >
+    <input type="text" id="Target" value="" >
 
     <p>
         <button onclick="copyToClipboard()">クリップボードにコピー</button>
