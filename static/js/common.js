@@ -26,7 +26,7 @@ $(function() {
     // テキストボックスをクリアする
     $("#clr").click(function() {
         $('#Target').val("");
-    });
+     });
 
     // 「例文を表示」ボタンが押されたら非同期でDBとやりとりして例文を取ってくる
     $("#button").click(function() {
