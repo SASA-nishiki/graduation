@@ -1,28 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <p>
-                <select id="situation">    
-            {% for item in situation_list %}
-                <option value="{{item}}">{{item}}</option>
-            {% endfor %}
-        </select>
+<header>
+    <p>メールの文面作ったぁ〜！
+        <img src="{{url_for('static', filename='header_pic.png')}}" /></p>
+</header>
 
-        <select id="destination">
-            {% for item in destination_list %}
-                <option value="{{item}}">{{item}}</option>
-            {% endfor %}
-        </select>
+<main>
+    <div class="top_table">
+        <table>
+            <tr>
+                <th>シチュエーション</th>
+                <th>カテゴリ</th>
+            </tr>
+            <tr>
+                <td>
+                    <select id="situation">
+                        {% for item in situation_list %}
+                        <option value="{{item}}">{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select id="destination">
+                        {% for item in destination_list %}
+                        <option value="{{item}}">{{item}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <button id="button" class="shortButton">例文を表示</button>
+                </td>
+            </tr>
+        </table>
 
-        <button id="button">例文を表示</button>
-    </p>
+        <!-- <input type="text" name="Target" id="Target" value="" class="textarea"> -->
+        <textarea id="Target" cols="80" rows="20"></textarea>
+    </div>
+    <div class="twobuttons">
+        <button onclick="copyToClipboard()" class="button">クリップボードにコピー</button>
 
-    <textarea id="Target" cols="50" rows="10"></textarea>
-    
-    <p>
-        <button onclick="copyToClipboard()">クリップボードにコピー</button>
-        
-        <button id="clr">例文をクリア</button>      
-    </p>
+        <button id="clr" class="button">例文をクリア</button>
+    </div>
+</main>
+<footer>
+    <br>
+    <br>
+    <br>
+</footer>
+<br>
 
 {% endblock %}

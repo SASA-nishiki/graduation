@@ -1,0 +1,102 @@
+header {
+    text-align: center;
+    margin-left: 0em;
+    text-indent: -2.8em;
+    font-size: 180%;
+    line-height: 2em;
+    color: white;
+    background-color: #00a6ff;
+}
+
+header p {
+    display: inline;
+    margin-left: 90px;
+}
+
+header img {
+    margin-right: 7px;
+    height: 70px;
+    width: 70px;
+    vertical-align: middle;
+}
+
+main {
+    background-color: #fff;
+    margin-top: 30px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+main table {
+    width: 490px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* main .textarea {
+    border-radius: 0px;
+    border: solid 2px rgb(40, 38, 38);
+    width: 500px;
+    height: 600px;
+} */
+
+main .shortButton {
+    border-radius: 10px;
+    background-color: #ccc;
+    border: solid 2px rgb(40, 38, 38);
+    margin-left: 20px;
+    width: 140px;
+    height: 40px;
+    font-size: 16px;
+}
+
+main .button {
+    border-radius: 10px;
+    background-color: #ccc;
+    border: solid 2px rgb(40, 38, 38);
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+}
+
+main .twobuttons {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+main select {
+    outline: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background: none transparent;
+    vertical-align: middle;
+    font-size: inherit;
+    color: inherit;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    height: 2em;
+}
+
+main td {
+    text-align: left;
+    width: 150px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+main th {
+    text-align: left;
+    width: 170px;
+    margin-top: 5x;
+}
+
+footer {
+    background-color: #00a6ff;
+}
