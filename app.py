@@ -47,9 +47,75 @@ def lower_conversion():
         # print(result_tuple[0])
         return_data = {"result":result_tuple[0]}
     else:
-        return_data = {"result":"いじわるしないで"}
+        return_data = {"result":"例文がありません"}
         
     return jsonify(ResultSet=json.dumps(return_data))
+
+# 非同期で送られてきた文字列からクエリを作成し例文を取得しブラウザに返す
+@app.route('/postText2', methods=['POST'])
+def lower_conversion2():
+    text = request.json['text']
+    
+    #配列にテキストを分割して入れる。0がシチュエーションで1が宛先
+    temp_query=text.split(",")
+    query={"situation": temp_query[0], "destination": temp_query[1],"details":temp_query[2]}
+    # print(query)
+
+    conn = sqlite3.connect('service.db')
+    c = conn.cursor()
+    c.execute("select sentence from Example_Sentence where situation = ? and destination = ? and details = ?",(query["situation"],query["destination"],query["details"]))
+
+    result_tuple=c.fetchone()
+    c.close()
+    
+    return_data = None
+
+    # DBから帰ってきた値から戻り値を決定
+    if result_tuple != None: 
+        # print(result_tuple[0])
+        return_data = {"result":result_tuple[0]}
+    else:
+        return_data = {"result":"例文がありません"}
+        
+    return jsonify(ResultSet=json.dumps(return_data))
+
+@app.route('/window/<string:querystr>')
+def window(querystr):
+
+    temp_query=querystr.split(",")
+    query={"situation": temp_query[0], "destination": temp_query[1]}
+
+    conn = sqlite3.connect('service.db')
+    c = conn.cursor()
+    # c.execute("select details from Example_Sentence where situation = ? and destination = ?",(query["situation"],query["destination"]))
+    c.execute("select details from Example_Sentence where situation = ? and destination = ?",(query["situation"],query["destination"]))
+    details_list = []
+
+    for row in c.fetchall():
+            details_list.append(row[0])
+    c.close()
+
+    return render_template("window.html",details_list=details_list)
+
+@app.route('/check', methods=['POST'])
+def check():
+    text = request.json['text']
+    
+    #配列にテキストを分割して入れる。0がシチュエーションで1が宛先
+    temp_query=text.split(",")
+    query={"situation": temp_query[0], "destination": temp_query[1]}
+    # print(query)
+
+    conn = sqlite3.connect('service.db')
+    c = conn.cursor()
+    c.execute("select count(*) from Example_Sentence where situation = ? and destination = ?",(query["situation"],query["destination"]))
+
+    result_tuple=c.fetchone()
+    c.close()
+
+    # print(result_tuple)
+      
+    return jsonify(ResultSet=json.dumps(result_tuple[0]))
 
 
 @app.errorhandler(403)

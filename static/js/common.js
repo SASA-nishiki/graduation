@@ -20,6 +20,12 @@ function clr(){
   
 }
 
+
+window.onbeforeunload = function(){
+  var winObj = window.open("", 'select');
+  winObj.close();
+}
+
 // Jqueryおまじない
 $(function() {
 
@@ -41,19 +47,88 @@ $(function() {
         // よく分からんが送りたい文字列をJSONという形式に変換しないとAJAXで送れないらしい
         var textData = JSON.stringify({"text":tempText});
 
-        // ここでAJAXという手法でサーバーに対し非同期通信を投げる
-        // 中身はよく分からんが引数を見れば何送れば良さそうか大体分かるでしょ
+
+
+        function details_len(){
+          return $.ajax({
+            type:'POST',
+            url:'/check',
+            data:textData,
+            contentType:'application/json',
+          })
+        }
+        details_len().done(function(data, status, xhr){
+
+          console.log(data['ResultSet']);
+          console.log(tempText);
+
+          if (Number(data['ResultSet']) >=2){
+          
+
+            var Return = window.open('/window/'+tempText,"select","width=300,height=200,scrollbars=yes");
+
+            
+          }else{
+  
+            // ここでAJAXという手法でサーバーに対し非同期通信を投げる
+            // 中身はよく分からんが引数を見れば何送れば良さそうか大体分かるでしょ
+            $.ajax({
+              type:'POST',
+              url:'/postText',
+              data:textData,
+              contentType:'application/json',
+              success:function(data) {
+                var result = JSON.parse(data.ResultSet).result;
+                $("#Target").val(result);
+              }
+            });
+            return false;
+  
+          }
+
+        }).fail(function(XMLHttpRequest, status, errorThrown){
+
+        });
+
+
+      });
+
+      // 小画面のボタン
+      $("#button2").click(function() {
+
+        let str = "";
+        const color2 = document.getElementsByName("example");
+      
+        for (let i = 0; i < color2.length; i++){
+          if(color2[i].checked){ //(color2[i].checked === true)と同じ
+            str = color2[i].value;
+            console.log(str);
+            break;
+          }
+        }
+
+        var tempText = decodeURIComponent(location.pathname.slice(location.pathname.lastIndexOf('/')+1));
+        tempText=tempText + "," + str ;
+
+        console.log(tempText);
+
+        textData = JSON.stringify({"text":tempText});
+        console.log(tempText);
+
         $.ajax({
           type:'POST',
-          url:'/postText',
+          url:'/postText2',
           data:textData,
           contentType:'application/json',
           success:function(data) {
             var result = JSON.parse(data.ResultSet).result;
-            $("#Target").val(result);
+            window.opener.document.getElementById("Target").value=result;
+            window.close();
           }
         });
+        
         return false;
+        
       });
 
 });

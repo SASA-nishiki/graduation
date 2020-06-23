@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form id="radio">
+    {% for item in details_list %}
+        <input type="radio" name="example" value="{{item}}">{{item}}
+    {% endfor %}
+</form>
+
+
+    <button id="button2" class="shortButton">例文を表示</button>
+
+{% endblock %}
