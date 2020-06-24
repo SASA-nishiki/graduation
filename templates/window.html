@@ -3,10 +3,13 @@
 
 <form id="radio">
     {% for item in details_list %}
-        <input type="radio" name="example" value="{{item}}">{{item}}
+        {% if details_first == item %}
+            <input type="radio" name="example" checked="checked" value="{{item}}">{{item}}
+        {% else %}
+            <input type="radio" name="example" value="{{item}}">{{item}}
+        {% endif %}
     {% endfor %}
 </form>
-
 
     <button id="button2" class="shortButton">例文を表示</button>
 

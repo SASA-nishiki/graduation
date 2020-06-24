@@ -23,7 +23,7 @@ def contents():
 
 
 
-# 非同期で送られてきた文字列からクエリを作成し例文を取得しブラウザに返す
+# 非同期で送られてきた文字列からクエリを作成し例文を取得しブラウザに返す(親ウィンドウ用)
 @app.route('/postText', methods=['POST'])
 def lower_conversion():
     text = request.json['text']
@@ -33,6 +33,7 @@ def lower_conversion():
     query={"situation": temp_query[0], "destination": temp_query[1]}
     # print(query)
 
+    # DBから対象の例文を取ってくる
     conn = sqlite3.connect('service.db')
     c = conn.cursor()
     c.execute("select sentence from Example_Sentence where situation = ? and destination = ?",(query["situation"],query["destination"]))
@@ -51,16 +52,19 @@ def lower_conversion():
         
     return jsonify(ResultSet=json.dumps(return_data))
 
-# 非同期で送られてきた文字列からクエリを作成し例文を取得しブラウザに返す
+
+
+# 非同期で送られてきた文字列からクエリを作成し例文を取得しブラウザに返す(子ウィンドウ用)
 @app.route('/postText2', methods=['POST'])
 def lower_conversion2():
     text = request.json['text']
     
-    #配列にテキストを分割して入れる。0がシチュエーションで1が宛先
+    #配列にテキストを分割して入れる。0がシチュエーションで1が宛先2が詳細
     temp_query=text.split(",")
     query={"situation": temp_query[0], "destination": temp_query[1],"details":temp_query[2]}
     # print(query)
 
+    # DBから対象の例文を取ってくる
     conn = sqlite3.connect('service.db')
     c = conn.cursor()
     c.execute("select sentence from Example_Sentence where situation = ? and destination = ? and details = ?",(query["situation"],query["destination"],query["details"]))
@@ -79,12 +83,17 @@ def lower_conversion2():
         
     return jsonify(ResultSet=json.dumps(return_data))
 
+
+
+# 子ウィンドウを表示
 @app.route('/window/<string:querystr>')
 def window(querystr):
 
+    # 配列にテキストを分割して入れる。0がシチュエーションで1が宛先
     temp_query=querystr.split(",")
     query={"situation": temp_query[0], "destination": temp_query[1]}
 
+    # DBから対象のdetailsを取ってくる
     conn = sqlite3.connect('service.db')
     c = conn.cursor()
     # c.execute("select details from Example_Sentence where situation = ? and destination = ?",(query["situation"],query["destination"]))
@@ -95,8 +104,11 @@ def window(querystr):
             details_list.append(row[0])
     c.close()
 
-    return render_template("window.html",details_list=details_list)
+    return render_template("window.html",details_list=details_list,details_first=details_list[0])
 
+
+
+# detailsの数を確認
 @app.route('/check', methods=['POST'])
 def check():
     text = request.json['text']
@@ -124,7 +136,7 @@ def mistake403(code):
 
 @app.errorhandler(404)
 def notfound404(code):
-    return "404だよ！！見つからないよ！！！"
+    return "該当アドレスのページがありません"
 
 
 # __name__ というのは、自動的に定義される変数で、現在のファイル(モジュール)名が入ります。 ファイルをスクリプトとして直接実行した場合、 __name__ は __main__ になります。
