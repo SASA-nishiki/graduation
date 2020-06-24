@@ -1,7 +1,7 @@
 header {
     text-align: center;
     margin-left: 0em;
-    text-indent: -2.8em;
+    text-indent: 1.2em;
     font-size: 180%;
     line-height: 2em;
     color: white;
@@ -10,11 +10,12 @@ header {
 
 header p {
     display: inline;
-    margin-left: 90px;
+    margin-right: 40px;
+    font-weight: bold;
 }
 
 header img {
-    margin-right: 7px;
+    margin: 0px 60px;
     height: 70px;
     width: 70px;
     vertical-align: middle;
@@ -45,21 +46,23 @@ main table {
 
 main .shortButton {
     border-radius: 10px;
-    background-color: #ccc;
-    border: solid 2px rgb(40, 38, 38);
+    background-color: #efefef;
+    border: solid 2px #616161;
     margin-left: 20px;
     width: 140px;
     height: 40px;
     font-size: 16px;
+    color: #4e4e4e;
 }
 
 main .button {
     border-radius: 10px;
-    background-color: #ccc;
-    border: solid 2px rgb(40, 38, 38);
+    background-color: #efefef;
+    border: solid 2px #616161;
     width: 200px;
     height: 40px;
     font-size: 16px;
+    color: #4e4e4e;
 }
 
 main .twobuttons {
@@ -68,6 +71,7 @@ main .twobuttons {
     margin-right: auto;
     margin-bottom: 40px;
     text-align: center;
+    color: #4e4e4e;
 }
 
 main select {
@@ -95,8 +99,37 @@ main th {
     text-align: left;
     width: 170px;
     margin-top: 5x;
+    color: #4e4e4e;
 }
 
 footer {
     background-color: #00a6ff;
+    height:70px;
+    width:100%;
+    position:absolute;
+    bottom:0;
+}
+
+footer p {
+    padding: 20px 0px;
+    text-align: center;
+    font-size: small;
+    color: #fff;
+    }
+
+html,body {
+    height: 100%;
+    }
+
+#wrapper {
+    width: 100%;
+    position:relative;
+    min-height: 100%;
+    }
+
+.inner{
+    padding-bottom:70px;
+   }
+p.window{
+    color: #4e4e4e;
 }

@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div id="wrapper">
 <header>
+    <img src="../static/header_pic.png" alt="メールの文面作った〜のアイコン">
     <p>メールの文面作ったぁ〜！</p>
 </header>
 
+<div class="inner">
 <main>
     <div class="top_table">
         <table>
@@ -37,17 +39,16 @@
         <textarea id="Target" cols="80" rows="20"></textarea>
     </div>
     <div class="twobuttons">
-        <button onclick="copyToClipboard()" class="button">クリップボードにコピー</button>
+        <button onclick="copyToClipboard()" class="button">例文をコピー</button>
 
         <button id="clr" class="button">例文をクリア</button>
     </div>
 
 </main>
+</div>
 <footer>
-    <br>
-    <br>
-    <br>
+    <p>Copyright&copy; SUNABACOおんらいん1st NDBチーム</p>
 </footer>
-<br>
+</div>
 
 {% endblock %}
